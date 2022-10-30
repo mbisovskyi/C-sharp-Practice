@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Forms;
 
 namespace Practice
 {
@@ -9,63 +8,73 @@ namespace Practice
         //METHODS
         public static void HidePhoneNumber()
         {
+            //Variables
             string phoneNumberInput;
             string clearedPhoneNumber;
+            bool doesContainSymbols;
+            bool isNumberValid;
+            string[] symbols = new string[] { "/", "-", ".", " ", ",", "*", "_" };
 
             phoneNumberInput = GetPhoneNumber();
-            clearedPhoneNumber = ClearedPhoneNumber(phoneNumberInput);
-            if (!IsPhoneNumberValid(clearedPhoneNumber))
+            doesContainSymbols = DoesContainSymbols(phoneNumberInput, symbols);
+            if (doesContainSymbols)
             {
-                Console.WriteLine("Number is not valid!");
-                Console.WriteLine("Do you want to restart? Y/N");
-                string userAnswer = Console.ReadLine().ToLower();
-                if (userAnswer == "y" || userAnswer == "yes")
+                clearedPhoneNumber = ClearedPhoneNumber(phoneNumberInput, symbols);
+                isNumberValid = IsPhoneNumberValid(clearedPhoneNumber);
+
+                if (!isNumberValid)
                 {
-                    HidePhoneNumber();
+                    Console.WriteLine($"\nEntered \"{phoneNumberInput}\" phone number is not valid!\n");
+                    HidePhoneNumber(); 
                 }
                 else
-                {
-                    Application.Exit();
-                }
+                { Console.WriteLine(ThreeChunksNumber(clearedPhoneNumber)); }
             }
             else
-            { Console.WriteLine(ThreeChunksNumber(clearedPhoneNumber)); }
+            {
+                isNumberValid = IsPhoneNumberValid(phoneNumberInput);
+
+                if (!isNumberValid)
+                { HidePhoneNumber(); }
+                else
+                { Console.WriteLine(ThreeChunksNumber(phoneNumberInput)); }
+            }
+
 
         }
 
         //Getting user's phone number as a string.
         private static string GetPhoneNumber()
         {
-
-            Console.WriteLine("Please, enter your phone number: ");
+            Console.WriteLine("Please, enter your phone number.");
+            Console.WriteLine("Number shouldn't contain letters and should be 10 digits long. Example: (111-222-3333): ");
             string phoneNumberInput = Console.ReadLine();
             return phoneNumberInput;
         }
 
         //Formatting phone number to clear out of any possible entered symbols.
-        private static string ClearedPhoneNumber(string phoneNumber)
+        private static string ClearedPhoneNumber(string phoneNumber, string[] symbols)
         {
-            string[] separatingSymbols = new string[] { "/", "-", ".", " ", ",", "*", "_" };
-            if (phoneNumber.Contains(separatingSymbols[0]))
-            { phoneNumber = phoneNumber.Replace(separatingSymbols[0], ""); }
+            if (phoneNumber.Contains(symbols[0]))
+            { phoneNumber = phoneNumber.Replace(symbols[0], ""); }
 
-            if (phoneNumber.Contains(separatingSymbols[1]))
-            { phoneNumber = phoneNumber.Replace(separatingSymbols[1], ""); }
+            if (phoneNumber.Contains(symbols[1]))
+            { phoneNumber = phoneNumber.Replace(symbols[1], ""); }
 
-            if (phoneNumber.Contains(separatingSymbols[2]))
-            { phoneNumber = phoneNumber.Replace(separatingSymbols[2], ""); }
+            if (phoneNumber.Contains(symbols[2]))
+            { phoneNumber = phoneNumber.Replace(symbols[2], ""); }
 
-            if (phoneNumber.Contains(separatingSymbols[3]))
-            { phoneNumber = phoneNumber.Replace(separatingSymbols[3], ""); }
+            if (phoneNumber.Contains(symbols[3]))
+            { phoneNumber = phoneNumber.Replace(symbols[3], ""); }
 
-            if (phoneNumber.Contains(separatingSymbols[4]))
-            { phoneNumber = phoneNumber.Replace(separatingSymbols[4], ""); }
+            if (phoneNumber.Contains(symbols[4]))
+            { phoneNumber = phoneNumber.Replace(symbols[4], ""); }
 
-            if (phoneNumber.Contains(separatingSymbols[5]))
-            { phoneNumber = phoneNumber.Replace(separatingSymbols[5], ""); }
+            if (phoneNumber.Contains(symbols[5]))
+            { phoneNumber = phoneNumber.Replace(symbols[5], ""); }
 
-            if (phoneNumber.Contains(separatingSymbols[6]))
-            { phoneNumber = phoneNumber.Replace(separatingSymbols[6], ""); }
+            if (phoneNumber.Contains(symbols[6]))
+            { phoneNumber = phoneNumber.Replace(symbols[6], ""); }
             return phoneNumber;
         }
 
@@ -93,13 +102,27 @@ namespace Practice
             { chunkTwo += phoneNumber[i]; }
             string hiddenChunkTwo = "###-";
 
-             //Getting a third chunk of a phone number.
-             string chunkThree = "";
-             for (int i = 6; i < phoneNumber.Length; i++)
-             { chunkThree += phoneNumber[i]; }
+            //Getting a third chunk of a phone number.
+            string chunkThree = "";
+            for (int i = 6; i < phoneNumber.Length; i++)
+            { chunkThree += phoneNumber[i]; }
 
-             return $"Original phone number is: {chunkOne + "-" + chunkTwo + "-" + chunkThree}\nHidden phone number: {hiddenChunkOne + hiddenChunkTwo + chunkThree}";
+            return $"Original phone number is: {chunkOne + "-" + chunkTwo + "-" + chunkThree}\nHidden phone number: {hiddenChunkOne + hiddenChunkTwo + chunkThree}";
 
+        }
+
+        //Check if phone number input contains symbols.
+        private static bool DoesContainSymbols(string phoneNumber, string[] symbols)
+        {
+            bool value = true;
+            foreach (string symbol in symbols)
+            {
+                if (phoneNumber.IndexOf(symbol) != -1)
+                { value = false; }
+                else
+                { value = true; }
+            }
+            return value;
         }
     }
 }
