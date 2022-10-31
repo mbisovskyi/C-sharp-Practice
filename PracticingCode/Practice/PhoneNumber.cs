@@ -13,7 +13,7 @@ namespace Practice
             string clearedPhoneNumber;
             bool doesContainSymbols;
             bool isNumberValid;
-            string[] symbols = new string[] { "/", "-", ".", " ", ",", "*", "_" };
+            string[] symbols = new string[] { "/", "-", ".", " ", ",", "*", "_", "=", ":", ";", "#", "$", "%", "^", "&", "(", ")", "+", "!", "@", "`", "~", "|", "<", ">", "\\", "'", "\""  };
 
             phoneNumberInput = GetPhoneNumber();
             doesContainSymbols = DoesContainSymbols(phoneNumberInput, symbols);
@@ -46,7 +46,7 @@ namespace Practice
         //Getting user's phone number as a string.
         private static string GetPhoneNumber()
         {
-            Console.WriteLine("Please, enter your phone number.");
+            Console.WriteLine("Please, enter a phone number to hide.");
             Console.WriteLine("Number shouldn't contain letters and should be 10 digits long. Example: (111-222-3333): ");
             string phoneNumberInput = Console.ReadLine();
             return phoneNumberInput;
@@ -55,26 +55,13 @@ namespace Practice
         //Formatting phone number to clear out of any possible entered symbols.
         private static string ClearedPhoneNumber(string phoneNumber, string[] symbols)
         {
-            if (phoneNumber.Contains(symbols[0]))
-            { phoneNumber = phoneNumber.Replace(symbols[0], ""); }
-
-            if (phoneNumber.Contains(symbols[1]))
-            { phoneNumber = phoneNumber.Replace(symbols[1], ""); }
-
-            if (phoneNumber.Contains(symbols[2]))
-            { phoneNumber = phoneNumber.Replace(symbols[2], ""); }
-
-            if (phoneNumber.Contains(symbols[3]))
-            { phoneNumber = phoneNumber.Replace(symbols[3], ""); }
-
-            if (phoneNumber.Contains(symbols[4]))
-            { phoneNumber = phoneNumber.Replace(symbols[4], ""); }
-
-            if (phoneNumber.Contains(symbols[5]))
-            { phoneNumber = phoneNumber.Replace(symbols[5], ""); }
-
-            if (phoneNumber.Contains(symbols[6]))
-            { phoneNumber = phoneNumber.Replace(symbols[6], ""); }
+            foreach (string symbol in symbols)
+            {
+                if (phoneNumber.IndexOf(symbol) != -1)
+                { 
+                    phoneNumber = phoneNumber.Replace(symbol, "");
+                }
+            }
             return phoneNumber;
         }
 
