@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Practice
 {
@@ -13,12 +14,13 @@ namespace Practice
             //Variables
             string[] symbols = new string[] { "/", "-", ".", " ", ",", "*", "_", "=", ":", ";", "#", "$", "%", "^", "&", "(", ")", "+", "!", "@", "`", "~", "|", "<", ">", "\\", "'", "\"" };
 
+
             string phoneNumberInput = GetPhoneNumber();
             string clearedPhoneNumber = ClearNumberOfSymbols(phoneNumberInput, symbols);
             bool isNumberValid = IsPhoneNumberValid(clearedPhoneNumber);
             if (isNumberValid)
             {
-                { Console.WriteLine(ThreeChunksNumber(clearedPhoneNumber)); }
+                { Console.WriteLine(FormattedPhoneNumber(clearedPhoneNumber)); }
 
             }
             else
@@ -44,11 +46,7 @@ namespace Practice
             {
                 if (phoneNumber.IndexOf(symbol) != -1)
                 {
-                    continue;
-                }
-                else
-                {
-                    phoneNumber.Replace(symbol, "");
+                    phoneNumber = phoneNumber.Replace(symbol, "");
                 }
             }
             return phoneNumber;
@@ -57,39 +55,34 @@ namespace Practice
         //Checking if phone number is valid (contains no letters).
         private static bool IsPhoneNumberValid(string phoneNumber)
         {
-            if (int.TryParse(phoneNumber, out int value) && phoneNumber.Length == 10)
-            { return true; }
+            if (phoneNumber.All(Char.IsDigit) == true && phoneNumber.Length == 10)
+            {
+                return true; }
             else
-            { return false; }
+            {
+                return false; }
         }
 
-        //Slice a phone number to 3 chunks.
-        private static string ThreeChunksNumber(string phoneNumber)
+        //Formatting a phone number to hidden number.
+        private static string FormattedPhoneNumber(string phoneNumber)
         {
             //Hidden digits
-            string hiddenDigits = "###-###-";
+            string hiddenNumber = "###-###-";
+            string originalPhoneNumber = "";
 
-            //Getting a first chunk of a phone number.
-            string chunkOne = "";
-            for (int i = 0; i < 3; i++)
-            { chunkOne += phoneNumber[i]; }
-            chunkOne += "-";
-
-            //Getting a second chunk of a phone number.
-            string chunkTwo = "";
-            for (int i = 3; i < 6; i++)
-            { chunkTwo += phoneNumber[i]; }
-            chunkTwo += "-";
-
-            //Getting a third chunk of a phone number.
-            string chunkThree = "";
-            for (int i = 6; i < phoneNumber.Length; i++)
-            { chunkThree += phoneNumber[i]; }
-
-            //Original phone number
-            string originalPhoneNumber = chunkOne + chunkTwo + chunkThree;
-
-            return $"Original phone number is: {originalPhoneNumber}\nHidden phone number: {hiddenDigits + chunkThree}";
+            for (int i = 0; i < phoneNumber.Length; i++)
+            {
+                if (i == 3 || i == 6)
+                {
+                    originalPhoneNumber += "-";
+                }
+                originalPhoneNumber += phoneNumber[i];
+                if (i > 5)
+                {
+                    hiddenNumber += phoneNumber[i];
+                }
+            }
+            return $"Original phone number is: {originalPhoneNumber}\nHidden phone number: {hiddenNumber}";
 
         }
     }
