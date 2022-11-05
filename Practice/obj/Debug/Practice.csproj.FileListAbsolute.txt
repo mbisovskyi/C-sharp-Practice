@@ -6,3 +6,11 @@ C:\Users\Nicholas Smith\Desktop\Code practice\C-sharp-Practice\PracticingCode\Pr
 C:\Users\Nicholas Smith\Desktop\Code practice\C-sharp-Practice\PracticingCode\Practice\obj\Debug\Practice.csproj.CoreCompileInputs.cache
 C:\Users\Nicholas Smith\Desktop\Code practice\C-sharp-Practice\PracticingCode\Practice\obj\Debug\Practice.exe
 C:\Users\Nicholas Smith\Desktop\Code practice\C-sharp-Practice\PracticingCode\Practice\obj\Debug\Practice.pdb
+C:\Users\Nicholas Smith\Desktop\CodePractice\C-sharp-Practice\PracticingCode\Practice\bin\Debug\Practice.exe.config
+C:\Users\Nicholas Smith\Desktop\CodePractice\C-sharp-Practice\PracticingCode\Practice\bin\Debug\Practice.exe
+C:\Users\Nicholas Smith\Desktop\CodePractice\C-sharp-Practice\PracticingCode\Practice\bin\Debug\Practice.pdb
+C:\Users\Nicholas Smith\Desktop\CodePractice\C-sharp-Practice\PracticingCode\Practice\obj\Debug\Practice.csproj.AssemblyReference.cache
+C:\Users\Nicholas Smith\Desktop\CodePractice\C-sharp-Practice\PracticingCode\Practice\obj\Debug\Practice.csproj.SuggestedBindingRedirects.cache
+C:\Users\Nicholas Smith\Desktop\CodePractice\C-sharp-Practice\PracticingCode\Practice\obj\Debug\Practice.csproj.CoreCompileInputs.cache
+C:\Users\Nicholas Smith\Desktop\CodePractice\C-sharp-Practice\PracticingCode\Practice\obj\Debug\Practice.exe
+C:\Users\Nicholas Smith\Desktop\CodePractice\C-sharp-Practice\PracticingCode\Practice\obj\Debug\Practice.pdb
